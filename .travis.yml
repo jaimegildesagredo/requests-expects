@@ -1,0 +1,17 @@
+language: python
+
+python:
+    - 2.7
+    - 3.3
+    - pypy
+
+install:
+ - python setup.py sdist
+ - mkdir tmp
+ - tar xvf dist/requests-expects-*.tar.gz -C tmp
+ - python tmp/requests-expects-*/setup.py install
+
+ - pip install -r requirements-devel.txt
+
+script:
+ - nosetests -P
