@@ -21,7 +21,7 @@ Also you can install the latest sources from Github.
 
      $ pip install -e git+git://github.com/jaimegildesagredo/requests-expects.git#egg=requests-expects
 
-Test
+Tests
 -----
 
 To run the test suite you should install the development requirements and then run `nosetests`.
