@@ -14,4 +14,4 @@ install:
  - pip install -r requirements-devel.txt
 
 script:
- - nosetests -P
+ - nosetests -P tests
