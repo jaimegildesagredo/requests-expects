@@ -64,3 +64,18 @@ class Response(Expectation):
     @property
     def ok(self):
         self._assert(self._actual.status_code < 400)
+
+    @property
+    def json(self):
+        self._assert('application/json' in self._actual.headers['Content-Type'])
+
+    @property
+    def xml(self):
+        content_type = self._actual.headers['Content-Type']
+
+        self._assert('text/xml' in content_type or
+                     'application/xml' in content_type)
+
+    @property
+    def html(self):
+        self._assert('text/html' in self._actual.headers['Content-Type'])
