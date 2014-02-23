@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
 from expects import expect
+from expects.testing import failure
 
-from ..helpers import failure
 from .. import mixins
 
 
@@ -11,8 +11,10 @@ class TestHtml(mixins.ContentType):
         expect(response=self.response('text/html')).to.be.html
 
     def test_should_fail_if_actual_has_application_json_content_type(self):
-        with failure():
-            expect(response=self.response('application/json')).to.be.html
+        response = self.response('application/json')
+
+        with failure(response, 'to be html'):
+            expect(response=response).to.be.html
 
 
 class TestNotHtml(mixins.ContentType):
@@ -20,5 +22,7 @@ class TestNotHtml(mixins.ContentType):
         expect(response=self.response('application/json')).not_to.be.html
 
     def test_should_fail_if_actual_has_text_html_content_type(self):
-        with failure():
-            expect(response=self.response('text/html')).not_to.be.html
+        response = self.response('text/html')
+
+        with failure(response, 'not to be html'):
+            expect(response=response).not_to.be.html
