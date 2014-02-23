@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from expects.expectation import Expectation
+from expects import matchers
 
 
 class Response(Expectation):
@@ -20,28 +21,7 @@ class Response(Expectation):
         self._assert(self._actual.status_code == expected, expected)
 
     def header(self, *args):
-        # FIXME(jaimegildesagredo): This code is basically equivalent to:
-        #                           expect(self._actual.headers).to.have.key(*args)
-
-        expected_name = args[0]
-
-        try:
-            expected_value = args[1]
-        except IndexError:
-            pass
-        else:
-            try:
-                value = self._actual.headers[expected_name]
-            except KeyError:
-                pass
-            else:
-                self._assert(value == expected_value,
-                             '{!r} with value {!r} but was {!r}'.format(
-                                 expected_name, expected_value, value))
-
-                return
-
-        self._assert(expected_name in self._actual.headers, expected_name)
+        self._assert(*matchers.key(self._actual.headers, *args))
 
     def headers(self, *args, **kwargs):
         # FIXME(jaimegildesagredo): This code is basically equivalent to:

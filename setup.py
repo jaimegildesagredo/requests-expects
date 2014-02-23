@@ -2,7 +2,9 @@
 
 from setuptools import setup, find_packages
 
-requirements = open('requirements.txt').read().splitlines()
+# TODO(jaimegildesagredo): Uncomment this line when expects 0.2.1 could be
+#                          installed from pypi
+requirements = []  #open('requirements.txt').read().splitlines()
 long_description = open('README.rst').read()
 
 setup(
